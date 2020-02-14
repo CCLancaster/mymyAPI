@@ -77,13 +77,14 @@ app.put('/wines/:id', (req, res) => {
 
 // DESTROY - wine has been drunk - DELETE /wine/:id (reroute to /wine)
 app.delete('/wines/:id', (req, res) => {
+    // const deletedWine = req.params.id.name
     db.wine.destroy({
         where: {
             id: req.params.id
         }
-    }).then(function(deletedWine) {
-        console.log('Baby BYE BYE BYE' + deletedWine);
-        res.send(`Either you drank it or you hated it, either way your threw away ${deletedWine}`);
+    }).then(function(wine) {
+        console.log(`Either you drank it or you hated it, either way your threw away bottle`);
+        res.redirect(`/wines`);
     }).catch(err => console.log(err));
     // res.send("DRANK WINE AT ID " + req.params.id);
 });
